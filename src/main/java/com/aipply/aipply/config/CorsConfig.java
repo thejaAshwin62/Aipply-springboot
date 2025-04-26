@@ -14,26 +14,24 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         
-        // Allow specific origins instead of wildcard
-        config.addAllowedOrigin("http://localhost:5173"); // Your React app's URL
-        config.addAllowedOrigin("http://localhost:3001"); // Alternative React port
+        // Add your Vercel domain
+        config.addAllowedOrigin("https://aipply-silk.vercel.app");
+        config.addAllowedOrigin("http://localhost:5173");
+        config.addAllowedOrigin("http://localhost:3001");
         
         // Allow credentials
         config.setAllowCredentials(true);
         
         // Allow specific HTTP methods
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("POST");
-        config.addAllowedMethod("PUT");
-        config.addAllowedMethod("DELETE");
-        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("*");
         
         // Allow specific headers
-        config.addAllowedHeader("Authorization");
-        config.addAllowedHeader("Content-Type");
-        config.addAllowedHeader("Accept");
+        config.addAllowedHeader("*");
+        
+        // Add exposed headers
+        config.addExposedHeader("Authorization");
         
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-} 
+}
