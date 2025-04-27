@@ -12,18 +12,29 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/")
+        registry.addResourceHandler("/**",
+                        "/assets/**",
+                        "/static/**")
+                .addResourceLocations(
+                        "classpath:/static/",
+                        "classpath:/static/assets/",
+                        "classpath:/public/"
+                )
                 .setCachePeriod(3600)
                 .resourceChain(true);
     }
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.mediaType("css", MediaType.valueOf("text/css"));
-        configurer.mediaType("js", MediaType.valueOf("application/javascript"));
-        configurer.mediaType("html", MediaType.valueOf("text/html"));
-        configurer.mediaType("svg", MediaType.valueOf("image/svg+xml"));
+        configurer
+                .mediaType("css", MediaType.valueOf("text/css"))
+                .mediaType("js", MediaType.valueOf("application/javascript"))
+                .mediaType("html", MediaType.valueOf("text/html"))
+                .mediaType("json", MediaType.valueOf("application/json"))
+                .mediaType("png", MediaType.valueOf("image/png"))
+                .mediaType("svg", MediaType.valueOf("image/svg+xml"))
+                .mediaType("ico", MediaType.valueOf("image/x-icon"))
+                .defaultContentType(MediaType.TEXT_HTML);
     }
 
     @Override
