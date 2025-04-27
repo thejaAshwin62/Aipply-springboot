@@ -10,19 +10,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**",
-                        "/assets/**",
-                        "/static/**")
-                .addResourceLocations(
-                        "classpath:/static/",
-                        "classpath:/static/assets/",
-                        "classpath:/public/"
-                )
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/")
                 .setCachePeriod(3600)
-                .resourceChain(true);
+                .resourceChain(false);
+
+        registry.addResourceHandler("/assets/**")
+                .addResourceLocations("classpath:/static/assets/")
+                .setCachePeriod(3600)
+                .resourceChain(false);
     }
+
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {

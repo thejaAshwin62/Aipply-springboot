@@ -70,7 +70,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/user-answers/**").hasAnyRole("Company", "Admin", "User")
                         .requestMatchers("/api/v1/feedback/**").hasAnyRole("Company", "Admin", "User")
                         .requestMatchers("/api/v1/applications/**").hasAnyRole("Company", "Admin", "User")
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()).headers(headers -> headers
+                        .frameOptions(frame -> frame.disable())
+                        .cacheControl(cache -> cache.disable())
+                )
+
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exception -> exception
