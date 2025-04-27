@@ -17,14 +17,14 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // Add allowed origins explicitly
-        config.setAllowedOrigins(Arrays.asList(
+        config.setAllowedOriginPatterns(Arrays.asList(
                 "https://aipply-springboot-production.up.railway.app",
-                "http://localhost:5173",
-                "http://localhost:8080"
+                "https://aipply-silk.vercel.app",
+                "http://localhost:*"
         ));
 
         // Allow credentials
-        config.setAllowCredentials(true);
+//        config.setAllowCredentials(true);
 
         // Allow specific HTTP methods
         config.setAllowedMethods(Arrays.asList(
