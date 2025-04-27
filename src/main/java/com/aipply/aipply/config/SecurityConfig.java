@@ -47,6 +47,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/register", "/api/v1/login").permitAll()
                         .requestMatchers("/api/v1/logout").permitAll()
+                        .requestMatchers("/", "/index.html").permitAll()
+                        .requestMatchers("/assets/**").permitAll()
+                        .requestMatchers("/static/**").permitAll()
+                        .requestMatchers("/*.svg", "/*.ico", "/*.js", "/*.css").permitAll()
                         .requestMatchers("/api/v1/companies/**").hasRole("Company")
                         .requestMatchers("/api/v1/jobs/**").hasAnyRole("Company", "Admin", "User")
                         .requestMatchers("/api/v1/job/**").hasAnyRole("Company", "Admin", "User")
@@ -71,15 +75,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(
-            "https://aipply-silk.vercel.app",
-            "http://localhost:5173",
-            "http://localhost:3001"
-        ));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:8080", "http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
         configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

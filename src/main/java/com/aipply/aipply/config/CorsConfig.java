@@ -15,10 +15,8 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
         
         // Add your Vercel domain
-        config.addAllowedOrigin("https://aipply-silk.vercel.app");
-        config.addAllowedOrigin("http://localhost:5173");
-        config.addAllowedOrigin("http://localhost:3001");
-        
+        config.addAllowedOrigin("*");
+
         // Allow credentials
         config.setAllowCredentials(true);
         
