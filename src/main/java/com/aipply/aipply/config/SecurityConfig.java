@@ -55,7 +55,8 @@ public class SecurityConfig {
                                 "/*.ico",
                                 "/*.png",
                                 "/*.svg",
-                                "/manifest.json"
+                                "/manifest.json",
+                                "/ping"
                         ).permitAll()
                         .requestMatchers("/api/v1/register", "/api/v1/login").permitAll()
                         .requestMatchers("/api/v1/logout").permitAll()

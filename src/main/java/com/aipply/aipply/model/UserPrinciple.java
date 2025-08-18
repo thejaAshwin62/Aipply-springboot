@@ -30,9 +30,9 @@ public class UserPrinciple implements UserDetails {
         return user.getEmail();
     }
 
-    public String getUserEmail() {
-        return user.getEmail();
-    }
+//    public String getUserEmail() {
+//        return user.getEmail();
+//    }
 
     @Override
     public boolean isAccountNonExpired() {
